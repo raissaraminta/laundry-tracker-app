@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FDE2E4">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Laundry Kos">
+<title>Laundry Kos Mandiri</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%BA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div><small>Laundry Kos Mandiri</small><h1 id="title">Sesi Laundry</h1></div>
+    <i class="fa-solid fa-basket-shopping logo"></i>
+  </header>
+
+  <main>
+    <section id="view-sesi" class="view"></section>
+    <section id="view-lemari" class="view"></section>
+    <section id="view-verif" class="view"></section>
+  </main>
+
+  <button id="fab" class="fab" aria-label="Tambah"><i class="fa-solid fa-plus"></i></button>
+
+  <nav class="bottom-nav" aria-label="Navigasi utama">
+    <button data-tab="sesi"><i class="fa-solid fa-basket-shopping"></i><span>Sesi Laundry</span></button>
+    <button data-tab="lemari"><i class="fa-solid fa-shirt"></i><span>Lemari Pakaian</span></button>
+    <button data-tab="verif"><i class="fa-solid fa-clipboard-check"></i><span>Verifikasi</span></button>
+  </nav>
+
+  <!-- Sheet: Tambah / Edit Pakaian -->
+  <div class="sheet" id="sheet-cloth">
+    <div class="sheet-card">
+      <div class="sheet-head"><h2 id="clothTitle">Tambah Pakaian</h2>
+        <button type="button" class="icon-btn" data-close aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button></div>
+      <form id="clothForm" autocomplete="off">
+        <label class="lbl" for="cName">Nama barang</label>
+        <input id="cName" class="input" required maxlength="60" placeholder="cth: Jilbab Voal Hitam">
+        <label class="lbl">Kategori</label>
+        <div id="catChips" class="chips"></div>
+        <label class="lbl" for="cColor">Warna / ciri khas (opsional)</label>
+        <input id="cColor" class="input" maxlength="80" placeholder="cth: Hitam, ada renda di tepi">
+        <label class="lbl">Foto panduan</label>
+        <div class="photo-grid">
+          <div>
+            <div class="photo-prev" id="prev-front"></div>
+            <div class="photo-btns">
+              <label class="btn btn-sm"><i class="fa-solid fa-camera"></i> Kamera
+                <input type="file" accept="image/*" capture="environment" data-side="front" hidden></label>
+              <label class="btn btn-sm"><i class="fa-solid fa-image"></i> Galeri
+                <input type="file" accept="image/*" data-side="front" hidden></label>
+            </div>
+          </div>
+          <div>
+            <div class="photo-prev" id="prev-back"></div>
+            <div class="photo-btns">
+              <label class="btn btn-sm"><i class="fa-solid fa-camera"></i> Kamera
+                <input type="file" accept="image/*" capture="environment" data-side="back" hidden></label>
+              <label class="btn btn-sm"><i class="fa-solid fa-image"></i> Galeri
+                <input type="file" accept="image/*" data-side="back" hidden></label>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" style="margin-top:18px"><i class="fa-solid fa-floppy-disk"></i> Simpan baju</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sheet: Sesi Baru -->
+  <div class="sheet" id="sheet-sesi">
+    <div class="sheet-card">
+      <div class="sheet-head"><h2>Sesi Laundry Baru</h2>
+        <button type="button" class="icon-btn" data-close aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button></div>
+      <form id="sesiForm">
+        <label class="lbl" for="sDate">Tanggal penyerahan</label>
+        <input type="date" id="sDate" class="input" required>
+        <div class="info"><i class="fa-solid fa-calendar-check"></i> Dikembalikan: <b id="sReturn"></b> (+2 hari)</div>
+        <label class="lbl">Pilih baju <span id="sCount" class="muted"></span></label>
+        <div id="sList"></div>
+        <button class="btn btn-primary btn-block" type="submit"><i class="fa-solid fa-paper-plane"></i> Kirim ke Laundry Kos</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox"><img alt="Pratinjau foto"></div>
+  <div id="toast" class="toast" role="status"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
